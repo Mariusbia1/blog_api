@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    // 🔓 PUBLIC - Liste tous les blogs (sans auth)
+    //  PUBLIC - Liste tous les blogs (sans auth)
     public function index()
     {
         $blogs = Blog::with('user:id,name')->latest()->get();
@@ -15,7 +15,7 @@ class BlogController extends Controller
         return response()->json($blogs);
     }
 
-    // 🔒 Créer un blog
+    //  Créer un blog
     public function store(Request $request)
     {
         $request->validate([
@@ -34,13 +34,13 @@ class BlogController extends Controller
         ], 201);
     }
 
-    // 🔒 Afficher un blog
+    //  Afficher un blog
     public function show(Blog $blog)
     {
         return response()->json($blog->load('user:id,name'));
     }
 
-    // 🔒 Modifier un blog (seulement le propriétaire)
+    //  Modifier un blog (seulement le propriétaire)
     public function update(Request $request, Blog $blog)
     {
         // Vérifier que l'utilisateur connecté est le propriétaire
@@ -63,7 +63,7 @@ class BlogController extends Controller
         ]);
     }
 
-    // 🔒 Supprimer un blog (seulement le propriétaire)
+    //  Supprimer un blog (seulement le propriétaire)
     public function destroy(Request $request, Blog $blog)
     {
         if ($request->user()->id !== $blog->user_id) {

@@ -9,7 +9,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    // ✅ INSCRIPTION
+    // INSCRIPTION
     public function register(Request $request)
     {
         $request->validate([
@@ -33,7 +33,7 @@ class AuthController extends Controller
         ], 201);
     }
 
-    // ✅ CONNEXION
+    // CONNEXION
     public function login(Request $request)
     {
         $request->validate([
@@ -49,7 +49,7 @@ class AuthController extends Controller
             ]);
         }
 
-        $user->tokens()->delete(); // Supprimer les anciens tokens
+        $user->tokens()->delete(); // Supprime les anciens tokens
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -60,7 +60,7 @@ class AuthController extends Controller
         ]);
     }
 
-    // ✅ DÉCONNEXION
+    // DÉCONNEXION
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

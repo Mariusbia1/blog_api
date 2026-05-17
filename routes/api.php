@@ -4,12 +4,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
-// 🔓 Routes PUBLIQUES (pas besoin d'être connecté)
+//  Routes PUBLIQUES (pas besoin d'être connecté)
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login',    [AuthController::class, 'login']);
 Route::get('/blogs',     [BlogController::class, 'index']);
 
-// 🔒 Routes PROTÉGÉES (token requis)
+//  Routes PROTÉGÉES (token requis)
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
